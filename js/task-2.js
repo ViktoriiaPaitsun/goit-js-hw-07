@@ -1,3 +1,4 @@
+"use strikt";
 const images = [
   {
     url: "https://images.pexels.com/photos/140134/pexels-photo-140134.jpeg?dpr=2&h=750&w=1260",
@@ -25,14 +26,23 @@ const images = [
   },
 ];
 
-const galleryList = document.querySelector(".gallery");
+const gallery = document.querySelector(".gallery");
+
+gallery.style.display = "grid";
+gallery.style.gridTemplateColumns = "repeat(3, 1fr)";
+gallery.style.gap = "24px";
+gallery.style.rowGap = "48px";
+gallery.style.listStyle = "none";
+gallery.style.padding = "0";
+gallery.style.margin = "0 auto";
+
 const galleryMarkup = images
   .map(
     ({ url, alt }) =>
-      `<li class="gallery-item"><img src="${url}" alt="${alt}" class="gallery-image"><\li>`
+      `<li class="gallery-item" style="display: flex; justify-content: center; align-items: center;">
+        <img src="${url}" alt="${alt}" style="width: 360px; height: 300px; display: block; object-fit: cover;">
+    </li>`
   )
   .join("");
 
-document
-  .querySelector(".gallery")
-  .insertAdjacentHTML("beforeend", galleryMarkup);
+gallery.insertAdjacentHTML("beforeend", galleryMarkup);
